@@ -1,21 +1,14 @@
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
-exports.up = function(knex) {
+
+exports.up = function (knex, Promise) {
   return knex.schema.createTable('users', table => {
       table.increments('id').primary()
       table.string('name').notNull()
-      table.string('email').notNul().unique()
+      table.string('email').notNull().unique()
       table.string('password').notNull()
-      table.string('admin').notNull().defaultTo(false)
+      table.boolean('admin').notNull().defaultTo(false)
   })
 };
 
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
-exports.down = function(knex) {
+exports.down = function (knex, Promise) {
   return knex.schema.dropTable('users')
 };
